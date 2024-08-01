@@ -2,32 +2,18 @@
 
 void ft_swap(t_list **a)
 {
-	t_list	*frist = malloc(sizeof(t_list));
-	t_list	*second = malloc(sizeof(t_list));
+	t_list	*first;
+	t_list	*second ;
+	void 	*var;
 	
-	if(ft_lstsize(*a) >= 2)
+	if(ft_lstsize(*a) > 1)
 	{
-		frist = *a;
+		first = *a;
 		second = (*a)->next;
-		(*a)->content = frist->content;
-		(*a)->next->content = second->content;
+		var = (*a)->content;
+		(*a)->content = second->content;
+		(*a)->next->content = var;
 	}
-}
-int main()
-{
-	t_list *a;
-
-	a = malloc(sizeof(t_list));
-	a->content = "Node 1";
-	a->next = NULL;
-		
-	ft_swap(&a);
-	
-	while (a != NULL) {
-		printf("%s\n", (char *)(a->content));
-		a = a->next;
-	}
-	return 0;
 }
 int	ft_lstsize(t_list *lst)
 {
