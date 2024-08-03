@@ -2,17 +2,15 @@
 
 void ft_swap(t_list **a)
 {
-	t_list	*first;
-	t_list	*second ;
-	void 	*var;
+	void	*var2;
+	void 	*var1;
 	
 	if(ft_lstsize(*a) > 1)
 	{
-		first = *a;
-		second = (*a)->next;
-		var = (*a)->content;
-		(*a)->content = second->content;
-		(*a)->next->content = var;
+		var1 = (*a)->content;
+		var2 = (*a)->next->content;
+		(*a)->content = var2;
+		(*a)->next->content = var1;
 	}
 }
 int	ft_lstsize(t_list *lst)
