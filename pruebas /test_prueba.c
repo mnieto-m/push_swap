@@ -2,55 +2,66 @@
 #include <stdlib.h>
 #include "prueba.h"
 
-void printList(t_list *lst) 
+ void printList(t_list *lst) 
 {
-    while (lst) 
+    while (lst != NULL) 
     {
-        printf("%d ", *(int *)lst->content);
-        lst = lst->next;
+        printf("%d ", *((int *)lst->content));
+        lst = (lst)->next;
     }
     printf("\n");
-}
+
+} 
 
 int main() {
-    // Test case 1: Empty list
-    t_list *list1 = NULL;
-    printf("Before swap (empty list): ");
-    printList(list1);
-    ft_swap(&list1);
-    printf("After swap (empty list): ");
-    printList(list1);
-    printf("\n");
 
-    // Test case 2: Single element list
-    t_list *list2 = malloc(sizeof(t_list));
-    int *data2 = malloc(sizeof(int));
-    *data2 = 10;
-    list2->content = data2;
-    list2->next = NULL;
-    printf("Before swap (single element list): ");
-    printList(list2);
-    ft_swap(&list2);
-    printf("After swap (single element list): ");
-    printList(list2);
-    printf("\n");
+t_list *list4 = NULL;
+printf("Before rotate (empty list): ");
+printList(list4);
+ft_rotate(&list4);
+printf("After rotate (empty list): ");
+printList(list4);
+printf("\n");
 
-    // Test case 3: Multiple element list
-    t_list *list3 = malloc(sizeof(t_list));
-    int *data3_1 = malloc(sizeof(int));
-    int *data3_2 = malloc(sizeof(int));
-    *data3_1 = 20;
-    *data3_2 = 30;
-    list3->content = data3_1;
-    list3->next = malloc(sizeof(t_list));
-    list3->next->content = data3_2;
-    list3->next->next = NULL;
-    printf("Before swap (multiple element list): ");
-    printList(list3);
-    ft_swap(&list3);
-    printf("After swap (multiple element list): ");
-    printList(list3);
-    printf("\n");
+// Test case 5: Rotate single element list
+t_list *list5 = malloc(sizeof(t_list));
+int *data5 = malloc(sizeof(int));
+*data5 = 50;
+list5->content = data5;
+list5->next = NULL;
+printf("Before rotate (single element list): ");
+printList(list5);
+ft_rotate(&list5);
+printf("After rotate (single element list): ");
+printList(list5);
+printf("\n");
 
-    return 0;
+// Test case 6: Rotate multiple element list
+t_list *list6 = malloc(sizeof(t_list));
+int *data6_1 = malloc(sizeof(int));
+int *data6_2 = malloc(sizeof(int));
+int *data6_3 = malloc(sizeof(int));
+int *data6_4 = malloc(sizeof(int));
+*data6_1 = 60;
+*data6_2 = 70;
+*data6_3 = 80;
+*data6_4 = 90;
+list6->content = data6_1;
+list6->next = malloc(sizeof(t_list));
+list6->next->content = data6_2;
+list6->next->next = malloc(sizeof(t_list));
+list6->next->next->content = data6_3;
+list6->next->next->next = malloc(sizeof(t_list));
+list6->next->next->next->content = data6_4;
+list6->next->next->next->next = NULL;
+printf("Before rotate (multiple element list): ");
+printList(list6);
+ft_rotate(&list6);
+printf("After rotate (multiple element list): ");
+printList(list6);
+printf("\n");
+
+ft_lstclear(&list5,free);
+ft_lstclear(&list6,free);
+ft_lstclear(&list6,free);
 }
