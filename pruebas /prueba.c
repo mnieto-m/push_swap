@@ -7,12 +7,16 @@ void ft_rotate(t_list **a)
 	
 	if (*a && (*a)->next)
 	{
-		var = (*a)->content;
-		aux = (*a)->next;
-		ft_lstadd_back(a, ft_lstnew(var));
-		free(*a);
-		*a = aux;
+		var = ft_lstlast(*a)->content;
+		ft_lstadd_front(a, ft_lstnew(var));
+		free(ft_lstlast(*a));
 	}
+	
+}
+void	ft_lstadd_front(t_list **lst, t_list *new)
+{
+	new->next = *lst;
+	*lst = new;
 }
 void	ft_lstclear(t_list **lst, void (*del)(void *))
 {
