@@ -6,13 +6,13 @@
 /*   By: mnieto-m <mnieto-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/26 14:23:07 by mnieto-m          #+#    #+#             */
-/*   Updated: 2024/08/07 20:04:12 by mnieto-m         ###   ########.fr       */
+/*   Updated: 2024/08/11 16:15:51 by mnieto-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 include "../push_swap.h"
 
-void ft_reverse_rotate(t_list **a)
+void ft_re_rotate(t_list **a)
 {
 	
 }

@@ -1,15 +1,18 @@
 #include "prueba.h"
 
-void ft_rotate(t_list **a)
+void ft_re_rotate(t_list **a)
 {
 	t_list *aux;
 	void *var = NULL;
 	
 	if (*a && (*a)->next)
 	{
+
 		var = ft_lstlast(*a)->content;
 		ft_lstadd_front(a, ft_lstnew(var));
 		free(ft_lstlast(*a));
+		(*a) = aux;
+		ft_lstlast(*a)->next = NULL;
 	}
 	
 }
