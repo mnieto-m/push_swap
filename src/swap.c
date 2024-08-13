@@ -6,11 +6,11 @@
 /*   By: mnieto-m <mnieto-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/26 14:23:13 by mnieto-m          #+#    #+#             */
-/*   Updated: 2024/08/07 15:53:59 by mnieto-m         ###   ########.fr       */
+/*   Updated: 2024/08/12 18:02:24 by mnieto-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-include "../push_swap.h"
+#include "../push_swap.h"
 
 void ft_swap(t_list **a)
 {
@@ -26,7 +26,7 @@ void ft_swap(t_list **a)
 	}
 }
 
-void ss(t_lis **a, t_list **b)
+void ss(t_list **a, t_list **b)
 {
 	void	*var1;
 	void	*var2;

@@ -1,20 +1,30 @@
 #include "prueba.h"
 
-void ft_re_rotate(t_list **a)
+void ft_push_a(t_list **a, t_list **b)
 {
 	t_list *aux;
-	void *var = NULL;
+	t_list *var;
 	
-	if (*a && (*a)->next)
+	if((*b))
 	{
-
-		var = ft_lstlast(*a)->content;
-		ft_lstadd_front(a, ft_lstnew(var));
-		free(ft_lstlast(*a));
-		(*a) = aux;
-		ft_lstlast(*a)->next = NULL;
+		ft_lstadd_front(b,ft_lstnew((*a)->content));
+		aux = (*a)->next;
+		free(*a);
+		*a = aux;
 	}
-	
+}
+t_list	*ft_lstsecond_last(t_list *a)
+{
+	t_list	*previous;
+
+	previous = NULL;
+	while(a->next != NULL)
+	{
+		previous = a;
+		a = a->next;
+	}
+
+	return(previous);
 }
 void	ft_lstadd_front(t_list **lst, t_list *new)
 {
