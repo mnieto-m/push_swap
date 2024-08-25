@@ -6,7 +6,7 @@
 /*   By: mnieto-m <mnieto-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/25 14:58:10 by mnieto-m          #+#    #+#             */
-/*   Updated: 2024/08/12 18:24:36 by mnieto-m         ###   ########.fr       */
+/*   Updated: 2024/08/25 21:45:19 by mnieto-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ typedef struct s_list
 
 int main(int argc, int **argv);
 
+//
 
 // Operaciones 
 void ft_swap(t_list **a);
