@@ -34,7 +34,7 @@ void	print_data(t_data *data)
 	while (data->nbr[++i])
 		printf("[%d]\t%d\n", i, data->nbr[i]);
 }
-int ft_issign(char c)
+int ft_is_sign(char c)
 {
 	if(c == '+' || c == '-')
 		return(1);
@@ -81,11 +81,11 @@ int	automata_getstate(int ostate, int dict_idx)
 // Devolver el estado de getstate
 int	automata_change_state(int ostate, char c)
 {
-	if (isspace(c) != 0)
+	if (ft_isspace(c) != 0)
 		return (automata_getstate(ostate, 0));
 	else if (ft_issign(c) != 0) 
 		return (automata_getstate(ostate, 1));
-	else if (isdigit(c) != 0)
+	else if (ft_isdigit(c) != 0)
 		return (automata_getstate(ostate, 2));
 	else
 		return (automata_getstate(ostate, 3));
