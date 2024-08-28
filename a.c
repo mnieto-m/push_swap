@@ -63,6 +63,7 @@ void	automata_add_data(void *s, void *d, int oidx, int idx)
 	//protect malloc
 	data->nbr[data->i] = ft_atoi(substr);
 	data->i++;
+	free(substr);
 }
 
 int	automata_getstate(int ostate, int dict_idx)
@@ -137,14 +138,14 @@ void	automata_parse(char *str, t_data *data)
 int	main(int argc, char **argv)
 {
 	t_data data;
-	int i = 0;
+	int i = 1;
 
 	memset(&data, 0, sizeof(data));
-	while(i >= 1)
+	while(i >= 1 && i < argc )
 	{
-		automata_parse(argv[i++], &data);
+		automata_parse(argv[i], &data);
 		print_data(&data);
-		
+		i++;
 	} 
 	//argv 1 solo pilla una pila 
 	return (0);
