@@ -12,6 +12,7 @@ typedef struct e_automata
 	int state ; 
 
 } t_automata;
+
 typedef enum e_states
 {
 	INIT,
@@ -34,7 +35,7 @@ void	print_data(t_data *data)
 	while (data->nbr[++i])
 		printf("[%d]\t%d\n", i, data->nbr[i]);
 }
-int ft_is_sign(char c)
+int ft_issign(char c)
 {
 	if(c == '+' || c == '-')
 		return(1);
@@ -136,9 +137,15 @@ void	automata_parse(char *str, t_data *data)
 int	main(int argc, char **argv)
 {
 	t_data data;
+	int i = 0;
 
 	memset(&data, 0, sizeof(data));
-	automata_parse(argv[1], &data);
-	print_data(&data);
+	while(i >= 1)
+	{
+		automata_parse(argv[i++], &data);
+		print_data(&data);
+		
+	} 
+	//argv 1 solo pilla una pila 
 	return (0);
 }
