@@ -4,11 +4,11 @@
 #include <string.h>
 #include <unistd.h>
 
-typedef struct e_automata
+typedef struct s_automata
 {
 	int		idx;
 	int		oidx;
-	int ostate; //OLD_STATE, former char
+	int 	ostate; //OLD_STATE
 	int		state;
 
 }			t_automata;
@@ -42,9 +42,10 @@ void	print_data(t_data *data)
 		printf("[%d]\t%d\n", i, data->nbr[i]);
 }
 
-void	ft_initi(void *struct_data)
+void	ft_initi(t_automata **var_automata)
 {
-	ft_memset(struct_data, 0,sizeof struct_data);
+	var_automata = malloc(sizeof(**var_automata)) ;
+	ft_memset(var_automata, 0,sizeof (**var_automata));
 }
 
 /* ----------------------------------------------------- */
@@ -100,37 +101,34 @@ int	automata_change_state(int ostate, char c)
 
 void	automata_parse(char *str, t_data *data)
 {
-	int		idx;
-	int		oidx;
-	void	(*tsa[6][6])(void *, void *, int, int);
-
-	idx = 0;
-	oidx = 0;
-	int ostate = 0; //OLD_STATE, former char
-	int state = 0;  //STATE, new state, char at idx
-	//array de funciones, tsa[ostate][state]
-	ft_memset(&tsa, 0, sizeof(tsa));
+	t_automata *var_automata;
+	
+  	var_automata = malloc(sizeof(*var_automata)) ;
+	ft_memset(var_automata, 0,sizeof(*var_automata));
+	void	(*tsa[6][6])(void *, void *, int, int); //array de funciones, tsa[ostate][state]
+	ft_memset(tsa, 0, sizeof(tsa));	
 	tsa[ISDIGIT][ISSPACE] = automata_add_data;
 	tsa[ISDIGIT][EOLINE] = automata_add_data;
-	idx = -1;
-	while (str[++idx])
+	var_automata->idx = -1;
+	while (str[++(var_automata->idx)])
 	{
 		//obtener estado actual de str[idx]
-		state = automata_change_state(ostate, str[idx]);
-		if (state == 1) //estado sencillo, llamamos a error
-			automata_error(idx);
+		var_automata->state = automata_change_state(var_automata->ostate, str[var_automata->idx]);
+		if (var_automata->state == 1) //estado sencillo, llamamos a error
+			automata_error(var_automata->idx);
 		//str //desde oidx hasta idx, itoa de substr,
 		// else if ((state == 2 && ostate == 4) ||
 		// 		(state == 4 && str[idx + 1]) == '\0')
-		if (tsa[ostate][state] != NULL)
+		if (tsa[var_automata->ostate][var_automata->state] != NULL)
 		{
-			tsa[ostate][state]((void *)str, data, oidx, idx);
-			oidx = idx;
+			tsa[var_automata->ostate][var_automata->state]((void *)str, data, var_automata->oidx, var_automata->idx);
+			var_automata->oidx = var_automata->idx;
 		}
-		if (state == ISDIGIT && str[idx + 1] == '\0')
-			tsa[state][EOLINE]((void *)str, data, oidx, idx + 1);
-		ostate = state; //antes de continuar la iteracion
+		if (var_automata->state == ISDIGIT && str[var_automata->idx + 1] == '\0')
+			tsa[var_automata->state][EOLINE]((void *)str, data, var_automata->oidx, (var_automata->idx) + 1);
+		var_automata->ostate = var_automata->state; //antes de continuar la iteracion
 	}
+	free(var_automata);
 }
 /* ----------------------------------------------------- */
 
