@@ -6,7 +6,7 @@
 /*   By: mnieto-m <mnieto-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/25 14:58:10 by mnieto-m          #+#    #+#             */
-/*   Updated: 2024/08/31 19:21:22 by mnieto-m         ###   ########.fr       */
+/*   Updated: 2024/09/05 18:37:31 by mnieto-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,14 +18,24 @@
 #include <stdio.h>
 #include <stdint.h>
 #include <stdlib.h>
-typedef struct e_automata
+typedef struct s_automata
 {
-	int idx ;
-	int oidx ;
-	int ostate;//OLD_STATE, former char
-	int state ; 
+	int		idx;
+	int		oidx;
+	int 	ostate; //OLD_STATE
+	int		state;
 
-} t_automata;
+}			t_automata;
+
+typedef enum e_states
+{
+	INIT,
+	ERR,
+	ISSPACE,
+	ISSIGN,
+	ISDIGIT,
+	EOLINE
+}			t_states;
 
 typedef struct s_list
 {

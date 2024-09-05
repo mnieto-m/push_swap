@@ -23,17 +23,12 @@ typedef enum e_states
 	EOLINE
 }			t_states;
 
-typedef struct e_data
-{
-	int		i;
-	int		nbr[256];
-}			t_data;
-
-void	print_data(t_data *data)
-{
-	int i = -1;
-	while (data->nbr[++i])
-		printf("[%d]\t%d\n", i, data->nbr[i]);
+void printList(t_list *lst) {
+    while (lst != NULL) {
+        printf("%d ", *((int *)lst->content));
+        lst = lst->next;
+    }
+    printf("\n");
 }
 
 /* ----------------------------------------------------- */
@@ -45,9 +40,16 @@ void automata_error(int idx)
 	exit(1);
 }
 /** Accion en transicion de estado, guardado de informacion */
-void	automata_add_data(void *s, void *d, int oidx, int idx)
+void	automata_add_data(void *s, t_list *a, int oidx, int idx)
 {
 	char	*str;
+	char	*substr;
+
+	str = s;
+	substr = ft_substr(str, oidx, idx - oidx);
+	a = ft_lstlast(ft_lstnew((void *) substr));
+	free(substr);
+/* 	char	*str;
 	char	*substr;
 	t_data	*data;
 
@@ -57,7 +59,7 @@ void	automata_add_data(void *s, void *d, int oidx, int idx)
 	//protect malloc
 	data->nbr[data->i] = ft_atoi_signal(substr);
 	data->i++;
-	free(substr);
+	free(substr); */
 }
 
 int	automata_getstate(int ostate, int dict_idx)
@@ -87,12 +89,12 @@ int	automata_change_state(int ostate, char c)
 		return (automata_getstate(ostate, 3));
 }
 
-void	automata_parse(char *str, t_data *data)
+void	automata_parse(char *str, t_list **a)
 {
 	t_automata *var_automata;
 	
 	var_automata = ft_calloc(1, sizeof(t_automata));
-	void	(*tsa[6][6])(void *, void *, int, int); //array de funciones, tsa[ostate][state]
+	void	(*tsa[6][6])(void *, struct s_list *, int, int); //array de funciones, tsa[ostate][state]
 	ft_memset(tsa, 0, sizeof(tsa));	
 	tsa[ISDIGIT][ISSPACE] = automata_add_data;
 	tsa[ISDIGIT][EOLINE] = automata_add_data;
@@ -108,11 +110,11 @@ void	automata_parse(char *str, t_data *data)
 		// 		(state == 4 && str[idx + 1]) == '\0')
 		if (tsa[var_automata->ostate][var_automata->state] != NULL)
 		{
-			tsa[var_automata->ostate][var_automata->state]((void *)str, data, var_automata->oidx, var_automata->idx);
+			tsa[var_automata->ostate][var_automata->state]((void *)str, &a, var_automata->oidx, var_automata->idx);
 			var_automata->oidx = var_automata->idx;
 		}
 		if (var_automata->state == ISDIGIT && str[var_automata->idx + 1] == '\0')
-			tsa[var_automata->state][EOLINE]((void *)str, data, var_automata->oidx, (var_automata->idx) + 1);
+			tsa[var_automata->state][EOLINE]((void *)str, &a, var_automata->oidx, (var_automata->idx) + 1);
 		var_automata->ostate = var_automata->state; //antes de continuar la iteracion
 	}
 	free(var_automata);
@@ -125,14 +127,15 @@ void	automata_parse(char *str, t_data *data)
 
 int	main(int argc, char **argv)
 {
-
-	t_data	data;
-	int		i;
+	t_list *a;
+/* 	t_list b; 
+ */	int		i;
 
 	i = 1;
-	ft_memset(&data, 0, sizeof(data));
 	while (i >= 1 && i < argc)
-		automata_parse(argv[i], &data);
-	print_data(&data);
+	{
+		ifautomata_parse(argv[i++], &(*a));
+	}
+	printList(&a);
 	return (0);
 }
