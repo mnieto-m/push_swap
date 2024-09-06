@@ -1,4 +1,5 @@
- # ignore ALL .vscode files
+#ignore ALL .vscode files
 *.vscode
- # ignore ALL .o files
+
+#ignore ALL .o files
 *.o
