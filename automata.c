@@ -23,14 +23,21 @@ typedef enum e_states
 	EOLINE
 }			t_states;
 
-void printList(t_list *lst) {
-    while (lst != NULL) {
-        printf("%d ", *((int *)lst->content));
-        lst = lst->next;
-    }
-    printf("\n");
-}
+typedef struct s_feed_automata
+{
 
+	char	*str;
+	char	*substr;
+	int 	*num;
+	t_list	*new;
+}			t_feed_automata;
+
+void printList(t_list **lst) {
+    while (*lst != NULL) {
+        printf("%i\n", *((int *)(*lst)->content));
+        *lst = (*lst)->next;
+    }
+}
 /* ----------------------------------------------------- */
 
 /* Accion en estado, cuando llega a state == 1 */
@@ -40,26 +47,17 @@ void automata_error(int idx)
 	exit(1);
 }
 /** Accion en transicion de estado, guardado de informacion */
-void	automata_add_data(void *s, t_list *a, int oidx, int idx)
+void	automata_add_data(void *s, t_list **a, int oidx, int idx)
 {
-	char	*str;
-	char	*substr;
+	t_feed_automata feed;
 
-	str = s;
-	substr = ft_substr(str, oidx, idx - oidx);
-	a = ft_lstlast(ft_lstnew((void *) substr));
-	free(substr);
-/* 	char	*str;
-	char	*substr;
-	t_data	*data;
-
-	str = s;
-	data = d;
-	substr = ft_substr(str, oidx, idx - oidx);
-	//protect malloc
-	data->nbr[data->i] = ft_atoi_signal(substr);
-	data->i++;
-	free(substr); */
+	feed.str = s;
+	feed.substr = ft_substr(feed.str, oidx, idx - oidx);
+	feed.num = malloc(sizeof (feed.num));
+	*feed.num = ft_atoi_signal(feed.substr);
+	feed.new = ft_lstnew((void *)feed.num);
+	ft_lstadd_back((a), feed.new);
+	free(feed.num);
 }
 
 int	automata_getstate(int ostate, int dict_idx)
@@ -94,7 +92,7 @@ void	automata_parse(char *str, t_list **a)
 	t_automata *var_automata;
 	
 	var_automata = ft_calloc(1, sizeof(t_automata));
-	void	(*tsa[6][6])(void *, struct s_list *, int, int); //array de funciones, tsa[ostate][state]
+	void	(*tsa[6][6])(void *, t_list **, int, int); //array de funciones, tsa[ostate][state]
 	ft_memset(tsa, 0, sizeof(tsa));	
 	tsa[ISDIGIT][ISSPACE] = automata_add_data;
 	tsa[ISDIGIT][EOLINE] = automata_add_data;
@@ -110,11 +108,11 @@ void	automata_parse(char *str, t_list **a)
 		// 		(state == 4 && str[idx + 1]) == '\0')
 		if (tsa[var_automata->ostate][var_automata->state] != NULL)
 		{
-			tsa[var_automata->ostate][var_automata->state]((void *)str, &a, var_automata->oidx, var_automata->idx);
+			tsa[var_automata->ostate][var_automata->state]((void *)str, a, var_automata->oidx, var_automata->idx);
 			var_automata->oidx = var_automata->idx;
 		}
 		if (var_automata->state == ISDIGIT && str[var_automata->idx + 1] == '\0')
-			tsa[var_automata->state][EOLINE]((void *)str, &a, var_automata->oidx, (var_automata->idx) + 1);
+			tsa[var_automata->state][EOLINE]((void *)str, &(*a), var_automata->oidx, (var_automata->idx) + 1);
 		var_automata->ostate = var_automata->state; //antes de continuar la iteracion
 	}
 	free(var_automata);
@@ -132,10 +130,12 @@ int	main(int argc, char **argv)
  */	int		i;
 
 	i = 1;
+	a = 0;
 	while (i >= 1 && i < argc)
 	{
-		ifautomata_parse(argv[i++], &(*a));
+		automata_parse(argv[i++], &a);
 	}
-	printList(&a);
+	printList((&a));
+	ft_lstclear(&a,free);
 	return (0);
 }

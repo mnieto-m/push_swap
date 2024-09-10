@@ -6,7 +6,7 @@
 /*   By: mnieto-m <mnieto-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/26 14:23:13 by mnieto-m          #+#    #+#             */
-/*   Updated: 2024/08/28 18:06:50 by mnieto-m         ###   ########.fr       */
+/*   Updated: 2024/09/06 15:29:38 by mnieto-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,10 @@ void ft_swap(t_list **a)
 	
 	if(ft_lstsize(*a) > 1)
 	{
-/* 		var1 = (*a)->content;
+		var1 = (*a)->content;
 		var2 = (*a)->next->content;
 		(*a)->content = var2;
-		(*a)->next->content = var1; */
+		(*a)->next->content = var1;
 	
 	}
 }

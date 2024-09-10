@@ -3,3 +3,9 @@
 
 #ignore ALL .o files
 *.o
+
+#ignore ALL .a files
+*.a
+
+#ignore ALL .a files
+a.out

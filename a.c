@@ -132,7 +132,7 @@ int	main(int argc, char **argv)
 	i = 1;
 	ft_memset(&data, 0, sizeof(data));
 	while (i >= 1 && i < argc)
-		automata_parse(argv[i], &data);
+		automata_parse(argv[i++], &data);
 	print_data(&data);
 	return (0);
 }
