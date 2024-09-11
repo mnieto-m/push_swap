@@ -25,9 +25,6 @@ typedef enum e_states
 
 typedef struct s_feed_automata
 {
-
-	char	*str;
-	char	*substr;
 	int 	*num;
 	t_list	*new;
 }			t_feed_automata;
@@ -49,15 +46,21 @@ void automata_error(int idx)
 /** Accion en transicion de estado, guardado de informacion */
 void	automata_add_data(void *s, t_list **a, int oidx, int idx)
 {
+	char	*str;
+	char	*substr;
 	t_feed_automata feed;
 
-	feed.str = s;
-	feed.substr = ft_substr(feed.str, oidx, idx - oidx);
-	feed.num = malloc(sizeof (feed.num));
-	*feed.num = ft_atoi_signal(feed.substr);
+	str = s;
+	substr = ft_substr(str, oidx, idx - oidx);
+	feed.num = malloc(sizeof(int));
+	if(feed.num== NULL)
+		return (ft_mfree(2,substr,feed));
+	*(feed.num) = ft_atoi_signal(substr);
 	feed.new = ft_lstnew((void *)feed.num);
+	if(feed.new== NULL)
+		return (ft_mfree(3,substr,feed.num,feed));
 	ft_lstadd_back((a), feed.new);
-	free(feed.num);
+	free(substr);
 }
 
 int	automata_getstate(int ostate, int dict_idx)
@@ -104,15 +107,13 @@ void	automata_parse(char *str, t_list **a)
 		if (var_automata->state == 1) //estado sencillo, llamamos a error
 			automata_error(var_automata->idx);
 		//str //desde oidx hasta idx, itoa de substr,
-		// else if ((state == 2 && ostate == 4) ||
-		// 		(state == 4 && str[idx + 1]) == '\0')
 		if (tsa[var_automata->ostate][var_automata->state] != NULL)
 		{
 			tsa[var_automata->ostate][var_automata->state]((void *)str, a, var_automata->oidx, var_automata->idx);
 			var_automata->oidx = var_automata->idx;
 		}
 		if (var_automata->state == ISDIGIT && str[var_automata->idx + 1] == '\0')
-			tsa[var_automata->state][EOLINE]((void *)str, &(*a), var_automata->oidx, (var_automata->idx) + 1);
+			tsa[var_automata->state][EOLINE]((void *)str, (a), var_automata->oidx, (var_automata->idx) + 1);
 		var_automata->ostate = var_automata->state; //antes de continuar la iteracion
 	}
 	free(var_automata);
@@ -130,12 +131,12 @@ int	main(int argc, char **argv)
  */	int		i;
 
 	i = 1;
-	a = 0;
+	a = NULL;
 	while (i >= 1 && i < argc)
 	{
 		automata_parse(argv[i++], &a);
 	}
-	printList((&a));
-	ft_lstclear(&a,free);
+/* 	printList((&a));
+ */	ft_lstclear(&a, free);
 	return (0);
 }
