@@ -28,19 +28,23 @@ typedef struct s_feed_automata
 	int 	*num;
 	t_list	*new;
 }			t_feed_automata;
-
-void printList(t_list **lst) {
-    while (*lst != NULL) {
-        printf("%i\n", *((int *)(*lst)->content));
-        *lst = (*lst)->next;
-    }
+void printList(t_list *a)
+{
+	t_list *lst;
+	lst = a;
+	while (lst != NULL) {
+		printf("%ls\n", ((int *)lst->content));
+	lst = (lst)->next;
+	}
 }
 /* ----------------------------------------------------- */
 
 /* Accion en estado, cuando llega a state == 1 */
-void automata_error(int idx)
+void automata_error( t_list **a,t_automata *var_automata)
 {
-	printf("Parse error at idx %d\n", idx);
+	printf("Parse error at idx %d\n", (var_automata)->idx);
+	ft_lstclear(a, free);
+	free(var_automata);
 	exit(1);
 }
 /** Accion en transicion de estado, guardado de informacion */
@@ -52,7 +56,7 @@ void	automata_add_data(void *s, t_list **a, int oidx, int idx)
 
 	str = s;
 	substr = ft_substr(str, oidx, idx - oidx);
-	feed.num = malloc(sizeof(int));
+	feed.num = malloc(sizeof(int*));
 	if(feed.num== NULL)
 		return (ft_mfree(2,substr,feed));
 	*(feed.num) = ft_atoi_signal(substr);
@@ -89,7 +93,7 @@ int	automata_change_state(int ostate, char c)
 	else
 		return (automata_getstate(ostate, 3));
 }
-
+// quitar puntero a var automata
 void	automata_parse(char *str, t_list **a)
 {
 	t_automata *var_automata;
@@ -105,7 +109,7 @@ void	automata_parse(char *str, t_list **a)
 		//obtener estado actual de str[idx]
 		var_automata->state = automata_change_state(var_automata->ostate, str[var_automata->idx]);
 		if (var_automata->state == 1) //estado sencillo, llamamos a error
-			automata_error(var_automata->idx);
+			automata_error(a, var_automata);
 		//str //desde oidx hasta idx, itoa de substr,
 		if (tsa[var_automata->ostate][var_automata->state] != NULL)
 		{
@@ -124,11 +128,11 @@ void	automata_parse(char *str, t_list **a)
  * ./a.out "234 +568 -321 3a34 " -> error
  */
 
+
 int	main(int argc, char **argv)
 {
 	t_list *a;
-/* 	t_list b; 
- */	int		i;
+	int		i;
 
 	i = 1;
 	a = NULL;
@@ -136,7 +140,7 @@ int	main(int argc, char **argv)
 	{
 		automata_parse(argv[i++], &a);
 	}
-/* 	printList((&a));
- */	ft_lstclear(&a, free);
+
+ft_lstclear(&a, free);
 	return (0);
 }
