@@ -38,7 +38,7 @@ void printList(t_list *a)
 /* Accion en estado, cuando llega a state == 1 */
 void automata_error( t_list **a)
 {
-	printf("Parse error\n");
+	printf(" error\n");
 	ft_lstclear(a, free);
 	exit(EXIT_FAILURE);
 }
@@ -56,6 +56,9 @@ void	automata_add_data(void *s, t_list **a, int oidx)
 	if (flag == -1)
 		return (free(numb),automata_error(a));
 	ft_lstadd_back((a), ft_lstnew((void *) numb));	
+	if(ft_lstisduplicate(a) == 0)
+		return(automata_error(a));
+
 }
 
 
