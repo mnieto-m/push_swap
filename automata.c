@@ -10,7 +10,7 @@ typedef struct s_automata
 	int		oidx;
 	int 	ostate; //OLD_STATE
 	int		state;
-
+	void	(*tsa[6][6])(void *, t_list **, int);
 }			t_automata;
 //implemetar estructuras escritas pero
 typedef enum e_states
@@ -38,7 +38,7 @@ void printList(t_list *a)
 /* Accion en estado, cuando llega a state == 1 */
 void automata_error( t_list **a)
 {
-	printf(" error\n");
+	printf("Error\n");
 	ft_lstclear(a, free);
 	exit(EXIT_FAILURE);
 }
@@ -52,13 +52,16 @@ void	automata_add_data(void *s, t_list **a, int oidx)
 	flag = 0;
 	str = s;
 	numb = malloc(sizeof(int));
+	if(!numb)
+		return(free(numb),automata_error(a));
 	*numb =  ft_atoi_signal(str + oidx, &flag);
 	if (flag == -1)
 		return (free(numb),automata_error(a));
 	ft_lstadd_back((a), ft_lstnew((void *) numb));	
+	if(!a)
+		return(free(numb), automata_error(a));
 	if(ft_lstisduplicate(a) == 0)
 		return(automata_error(a));
-
 }
 
 
@@ -88,16 +91,22 @@ int	automata_change_state(int ostate, char c)
 	else
 		return (automata_getstate(ostate, 3));
 }
-// quitar puntero a var automata
+static void end_line(char *str, t_list **a, t_automata var_automata)
+{
+		if (var_automata.state == ISSIGN  && str[var_automata.idx + 1] == '\0')
+			automata_error(a);
+		if(var_automata.state == ISDIGIT  && str[var_automata.idx + 1] == '\0') 
+			var_automata.tsa[var_automata.state][EOLINE]((void *)str, (a), var_automata.oidx);	
+}
+
+
 void	automata_parse(char *str, t_list **a)
 {
 	t_automata var_automata;
 	
 	ft_memset((void *)&var_automata, 0, sizeof(var_automata));
-	void	(*tsa[6][6])(void *, t_list **, int); //array de funciones, tsa[ostate][state]
-	ft_memset(tsa, 0, sizeof(tsa));	
-	tsa[ISDIGIT][ISSPACE] = automata_add_data;
-	tsa[ISDIGIT][EOLINE] = automata_add_data;
+	var_automata.tsa[ISDIGIT][ISSPACE] = automata_add_data;//proteger malloc???
+	var_automata.tsa[ISDIGIT][EOLINE] = automata_add_data;//proteger malloc???
 	var_automata.idx = -1;
 	while (str[++(var_automata.idx)])
 	{
@@ -106,27 +115,23 @@ void	automata_parse(char *str, t_list **a)
 		if (var_automata.state == 1) //estado sencillo, llamamos a error
 			automata_error(a);
 		//str //desde oidx hasta idx, itoa de substr,
-		if (tsa[var_automata.ostate][var_automata.state] != NULL)
+		if (var_automata.tsa[var_automata.ostate][var_automata.state] != NULL)
 		{
-			tsa[var_automata.ostate][var_automata.state]((void *)str, a, var_automata.oidx);
+			var_automata.tsa[var_automata.ostate][var_automata.state]((void *)str, a, var_automata.oidx);
 			var_automata.oidx = var_automata.idx;
 		}
-		if (var_automata.state == ISDIGIT && str[var_automata.idx + 1] == '\0')
-			tsa[var_automata.state][EOLINE]((void *)str, (a), var_automata.oidx);
-		var_automata.ostate = var_automata.state; //antes de continuar la iteracion
+		if (str[var_automata.idx + 1] == '\0')
+ 			end_line(str, a, var_automata);//antes de continuar la iteracion
+		var_automata.ostate = var_automata.state;
 	}
 }
 /* ----------------------------------------------------- */
-
-/**
- * ./a.out "234 +568 -321 3a34 " . error
- */
-
 
 int	main(int argc, char **argv)
 {
 	t_list *a;
 	int		i;
+
 
 	i = 1;
 	a = NULL;
