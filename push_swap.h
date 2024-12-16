@@ -6,12 +6,12 @@
 /*   By: mnieto-m <mnieto-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/25 14:58:10 by mnieto-m          #+#    #+#             */
-/*   Updated: 2024/09/05 18:37:31 by mnieto-m         ###   ########.fr       */
+/*   Updated: 2024/11/05 21:05:39 by mnieto-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef LIBFT_H
-# define LIBFT_H
+#ifndef PUSH_SWAP_H
+# define PUSH_SWAP_H
 
 #include "./Libft/libft.h"
 #include <limits.h>
