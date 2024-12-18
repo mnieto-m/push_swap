@@ -6,25 +6,26 @@
 /*   By: mnieto-m <mnieto-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/25 14:58:10 by mnieto-m          #+#    #+#             */
-/*   Updated: 2024/11/05 21:05:39 by mnieto-m         ###   ########.fr       */
+/*   Updated: 2024/12/18 17:13:04 by mnieto-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PUSH_SWAP_H
 # define PUSH_SWAP_H
 
-#include "./Libft/libft.h"
+#include "../Libft/include/libft.h"
 #include <limits.h>
 #include <stdio.h>
 #include <stdint.h>
 #include <stdlib.h>
+
 typedef struct s_automata
 {
 	int		idx;
 	int		oidx;
-	int 	ostate; //OLD_STATE
+	int		ostate;
 	int		state;
-
+	void	(*tsa[6][6])(void *, t_list **, int);
 }			t_automata;
 
 typedef enum e_states
@@ -37,13 +38,8 @@ typedef enum e_states
 	EOLINE
 }			t_states;
 
-typedef struct s_list
-{
-	void			*content;
-	struct s_list	*next;
-}					t_list;
 
-int main(int argc, int **argv);
+int main(int argc, char **argv);
 
 //
 
@@ -58,4 +54,8 @@ void ft_re_rotate(t_list **a);
 void ft_rr(t_list **a, t_list **b);
 void ft_re_rotate(t_list **a);
 
+
+// automata
+void	automata_parse(char *str, t_list **a);
+void	automata_error(t_list **a);
 #endif

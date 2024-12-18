@@ -1,32 +1,63 @@
-NAME = ./Push_swap
+NAME = ./push_swap
 
-#flags#
+# Variables generales
+CC = cc
+CFLAGS = -Wall -Wextra -Werror -Iinclude/
+RM = rm
+RMFLAGS = -rf
+MKDIR = mkdir -p
+INCLUDE = -I${INCLUDE_DIR}
+# Directorios
 
-G = gcc
-GCFLAGS = -Werror -Wextra -Wall
-
-#directorios#
+LIBFT_DIR = Libft/
+LIBFT_BIN = Libft/bin/
+LIBFT_NAME = $(LIBFT_BIN)libft.a
 SRC_DIR = src/
+OBJ_DIR = obj/
+BIN_DIR = bin/
 INCLUDE_DIR = include/
-OBJ_DIR = objects/
 
+#Files
+FILES = main\
+		automata\
+		automata_error\
+		push\
+		rotate\
+		swap\
+		reverse_rotate
 
-INCLUDE = 
-SRC = $(addprefix $(SRC_DIR) *.c)
-OBJ = $(SRC.c = .o)
+# FILES_ADD
+SRC = $(addprefix $(SRC_DIR), $(addsuffix .c, $(FILES)))
 
-all : ${NAME}
+OBJ = $(addprefix $(BIN_DIR), $(addsuffix .o, $(FILES)))
 
-${NAME} : ${OBJ}
-	$(G) $(GCFLAGS) $(OBJ)
+# 1ª RULE
+all:  $(NAME)
 
+# Comp bin
+$(NAME): $(OBJ) $(LIBFT_NAME)
+	$(MKDIR) $(BIN_DIR)
+	$(CC) $(CFLAGS) $(INCLUDE) $(OBJ) $(LIBFT_NAME) -o $@
 
+# Comp .O
+$(BIN_DIR)%.o: $(SRC_DIR)%.c
+	$(MKDIR) $(dir $@)
+	$(CC) $(CFLAGS) -c $< -o $@
+
+# Compilar la libft
+$(LIBFT_NAME):
+	$(MAKE) -C $(LIBFT_DIR)
+
+# clean OBJ
 clean:
-	$(RM) $(RMFLAGS) ${OBJ}
+	$(RM) $(RMFLAGS) $(OBJ_DIR)
 
-fclean: clean 
-	$(RM) $(RMFLAGS) $(NAME)
+# clean binary OBJ
+fclean: clean
+	$(RM) $(RMFLAGS) $(BIN_DIR) $(NAME)
+	$(MAKE) -C $(LIBFT_DIR) fclean
 
+# Recompilar todo
 re: fclean all
 
 .PHONY: all clean fclean re
