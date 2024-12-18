@@ -50,7 +50,7 @@ $(LIBFT_NAME):
 
 # clean OBJ
 clean:
-	$(RM) $(RMFLAGS) $(OBJ_DIR)
+	$(RM) $(RMFLAGS) $(BIN_DIR)
 
 # clean binary OBJ
 fclean: clean
