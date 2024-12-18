@@ -13,7 +13,7 @@ LIBFT_DIR = Libft/
 LIBFT_BIN = Libft/bin/
 LIBFT_NAME = $(LIBFT_BIN)libft.a
 SRC_DIR = src/
-OBJ_DIR = obj/
+OBJ_DIR = bin/obj/
 BIN_DIR = bin/
 INCLUDE_DIR = include/
 
@@ -29,10 +29,10 @@ FILES = main\
 # FILES_ADD
 SRC = $(addprefix $(SRC_DIR), $(addsuffix .c, $(FILES)))
 
-OBJ = $(addprefix $(BIN_DIR), $(addsuffix .o, $(FILES)))
+OBJ = $(addprefix $(OBJ_DIR), $(addsuffix .o, $(FILES)))
 
 # 1ª RULE
-all:  $(NAME)
+all: $(NAME)
 
 # Comp bin
 $(NAME): $(OBJ) $(LIBFT_NAME)
@@ -40,7 +40,7 @@ $(NAME): $(OBJ) $(LIBFT_NAME)
 	$(CC) $(CFLAGS) $(INCLUDE) $(OBJ) $(LIBFT_NAME) -o $@
 
 # Comp .O
-$(BIN_DIR)%.o: $(SRC_DIR)%.c
+$(OBJ_DIR)%.o: $(SRC_DIR)%.c
 	$(MKDIR) $(dir $@)
 	$(CC) $(CFLAGS) -c $< -o $@
 
@@ -50,7 +50,7 @@ $(LIBFT_NAME):
 
 # clean OBJ
 clean:
-	$(RM) $(RMFLAGS) $(BIN_DIR)
+	$(RM) $(RMFLAGS) $(OBJ_DIR)
 
 # clean binary OBJ
 fclean: clean
