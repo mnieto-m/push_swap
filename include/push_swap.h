@@ -6,7 +6,7 @@
 /*   By: mnieto-m <mnieto-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/25 14:58:10 by mnieto-m          #+#    #+#             */
-/*   Updated: 2024/12/18 17:13:04 by mnieto-m         ###   ########.fr       */
+/*   Updated: 2024/12/28 17:46:23 by mnieto-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 #include <stdio.h>
 #include <stdint.h>
 #include <stdlib.h>
+#include <stdbool.h>
 
 typedef struct s_automata
 {
@@ -38,22 +39,78 @@ typedef enum e_states
 	EOLINE
 }			t_states;
 
+typedef struct s_node
+{
+	int				value;
+	struct s_node	*prev;
+	struct s_node	*next;
+}	t_node;
+
+typedef struct s_loc_node
+{
+	struct s_node	*node;
+	int				loc;
+}	t_loc_node;
+
+typedef struct s_rated_node
+{
+	struct s_loc_node		src_nd;
+	struct s_loc_node		dst_nd;
+	int						rate;
+}	t_rated_node;
+
+typedef struct s_stack
+{
+	struct s_node			*head;
+	struct s_loc_node		peak;
+	int						size;
+	char					name;
+}	t_stack;
+
+typedef struct s_stacks
+{
+	struct s_stack			a;
+	struct s_stack			b;
+	struct s_node			nodes[];
+}	t_stacks;
+
+typedef struct s_ord
+{
+	bool		(*gt)(int a, int b);
+	t_loc_node	top;
+}	t_ord;
 
 int main(int argc, char **argv);
 
 //
 
 // Operaciones 
-void ft_swap(t_list **a);
-void ss(t_list **a,t_list **b);
-void pa(t_list **a, t_list **b);
-void pb(t_list **a, t_list **b);
-void ft_rotate(t_list **a);
-void ft_rr(t_list **a,t_list **b);
-void ft_re_rotate(t_list **a);
-void ft_rr(t_list **a, t_list **b);
-void ft_re_rotate(t_list **a);
+bool		greater(int a, int b);
+bool		lower(int a, int b);
+void		set_top(t_stack *stack, t_ord *ord);
 
+t_stacks	*init_stacks(t_list *a, int size);
+void		head_to_bottom(t_stack *stack, t_ord *ord);
+bool		stack_sorted(t_stack *stack, t_ord *ord, bool relative);
+
+void		rot(t_stack *stack, bool print);
+void		rrot(t_stacks *stacks, bool print);
+void		rrev(t_stacks *stacks, bool print);
+void		rev(t_stack *stack, bool print);
+void		push(t_stack *src, t_stack *dst, bool print);
+void		swap(t_stack *stack, bool print);
+void		sswap(t_stacks *stacks, bool print);
+
+void		print_rots(t_rated_node *rots, t_stack *src);
+void		calc_rots(t_rated_node *rnd);
+
+void		push_stack(t_stack *src, t_stack *dst, t_ord *ord, int limit);
+
+void		sort_2(t_stack *stack);
+void		sort_3(t_stack *stack, t_ord *ord, bool relative);
+void		turk(t_stacks *s, int median, int size);
+
+int			*parse(int argc, const char *argv[], int *size, int *median);
 
 // automata
 void	automata_parse(char *str, t_list **a);
