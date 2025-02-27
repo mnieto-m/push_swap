@@ -6,11 +6,11 @@
 /*   By: mnieto-m <mnieto-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/28 17:39:51 by mnieto-m          #+#    #+#             */
-/*   Updated: 2024/12/28 17:39:55 by mnieto-m         ###   ########.fr       */
+/*   Updated: 2025/02/15 12:23:16 by mnieto-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pswap.h"
+#include "push_swap.h"
 
 void		calc_rots(t_rated_node *rnd);
 static void	case_pp(t_rated_node *rnd);

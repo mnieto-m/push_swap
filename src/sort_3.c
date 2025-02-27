@@ -6,11 +6,11 @@
 /*   By: mnieto-m <mnieto-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/28 17:40:54 by mnieto-m          #+#    #+#             */
-/*   Updated: 2024/12/28 17:46:08 by mnieto-m         ###   ########.fr       */
+/*   Updated: 2025/02/15 12:24:16 by mnieto-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pswap.h"
+#include "push_swap.h"
 
 void		sort_2(t_stack *stack);
 void		sort_3(t_stack *stack, t_ord *ord, bool relative);

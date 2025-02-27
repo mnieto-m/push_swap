@@ -6,11 +6,11 @@
 /*   By: mnieto-m <mnieto-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/28 17:40:45 by mnieto-m          #+#    #+#             */
-/*   Updated: 2024/12/28 17:40:50 by mnieto-m         ###   ########.fr       */
+/*   Updated: 2025/02/15 12:24:11 by mnieto-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pswap.h"
+#include "push_swap.h"
 
 void		head_to_bottom(t_stack *stack, t_ord *ord);
 t_stacks	*init_stacks(int arr[], int nbs);
