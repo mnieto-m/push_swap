@@ -6,39 +6,13 @@
 /*   By: mnieto-m <mnieto-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/28 17:40:33 by mnieto-m          #+#    #+#             */
-/*   Updated: 2025/02/15 12:23:49 by mnieto-m         ###   ########.fr       */
+/*   Updated: 2025/02/22 16:54:28 by mnieto-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void		push_stack(t_stack *src, t_stack *dst, t_ord *ord, int limit);
-static void	get_rots(t_stack *src, t_stack *dst, t_ord *ord, t_rated_node *rnd);
-static void	get_tg(t_stack *src, t_stack *dst, t_rated_node *rnd, t_ord *ord);
-static void	get_cost(t_stack *src, t_stack *dst, t_rated_node *rnd);
-static bool	out_of_bounds(int value, t_ord *ord);
-
-void	push_stack(t_stack *src, t_stack *dst, t_ord *ord, int limit)
-{
-	t_rated_node	rots;
-
-	set_top(dst, ord);
-	while (src->size > limit)
-	{
-		get_rots(src, dst, ord, &rots);
-		src->head = rots.src_nd.node;
-		dst->head = rots.dst_nd.node;
-		ord->top.loc = ft_mod(ord->top.loc - rots.dst_nd.loc, dst->size);
-		print_rots(&rots, src);
-		push(src, dst, true);
-		if (ord->gt(dst->head->value, ord->top.node->value))
-			ord->top = (t_loc_node){dst->head, 0};
-		else
-			ord->top.loc = (ord->top.loc + 1) % dst->size;
-	}
-}
-
-static void	get_rots(t_stack *src, t_stack *dst, t_ord *ord, t_rated_node *rnd)
+void	get_rots(t_stack *src, t_stack *dst, t_ord *ord, t_rated_node *rnd)
 {
 	t_rated_node	cur;
 
@@ -59,7 +33,7 @@ static void	get_rots(t_stack *src, t_stack *dst, t_ord *ord, t_rated_node *rnd)
 	}
 }
 
-static void	get_tg(t_stack *src, t_stack *dst, t_rated_node *rnd, t_ord *ord)
+void	get_tg(t_stack *src, t_stack *dst, t_rated_node *rnd, t_ord *ord)
 {
 	if (out_of_bounds(rnd->src_nd.node->value, ord))
 	{
@@ -87,7 +61,7 @@ static void	get_tg(t_stack *src, t_stack *dst, t_rated_node *rnd, t_ord *ord)
 	get_cost(src, dst, rnd);
 }
 
-static void	get_cost(t_stack *src, t_stack *dst, t_rated_node *rnd)
+void	get_cost(t_stack *src, t_stack *dst, t_rated_node *rnd)
 {
 	int	src_nd_loc;
 	int	dst_nd_loc;
@@ -115,11 +89,31 @@ static void	get_cost(t_stack *src, t_stack *dst, t_rated_node *rnd)
 	}
 }
 
-static bool	out_of_bounds(int value, t_ord *ord)
+bool	out_of_bounds(int value, t_ord *ord)
 {
 	if (ord->gt(value, ord->top.node->value))
 		return (true);
 	if (ord->gt(ord->top.node->next->value, value))
 		return (true);
 	return (false);
+}
+
+void	push_stack(t_stack *src, t_stack *dst, t_ord *ord, int limit)
+{
+	t_rated_node	rots;
+
+	set_top(dst, ord);
+	while (src->size > limit)
+	{
+		get_rots(src, dst, ord, &rots);
+		src->head = rots.src_nd.node;
+		dst->head = rots.dst_nd.node;
+		ord->top.loc = ft_mod(ord->top.loc - rots.dst_nd.loc, dst->size);
+		print_rots(&rots, src);
+		push(src, dst, true);
+		if (ord->gt(dst->head->value, ord->top.node->value))
+			ord->top = (t_loc_node){dst->head, 0};
+		else
+			ord->top.loc = (ord->top.loc + 1) % dst->size;
+	}
 }

@@ -1,37 +1,48 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ord.c                                              :+:      :+:    :+:   */
+/*   other_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mnieto-m <mnieto-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/28 17:40:05 by mnieto-m          #+#    #+#             */
-/*   Updated: 2025/02/19 22:40:30 by mnieto-m         ###   ########.fr       */
+/*   Created: 2025/02/22 16:45:14 by mnieto-m          #+#    #+#             */
+/*   Updated: 2025/02/26 20:28:16 by mnieto-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-bool	greater(int a, int b)
+int	ft_maxint(int a, int b)
 {
-	return (a > b);
+	if (b > a)
+		return (b);
+	return (a);
 }
 
-bool	lower(int a, int b)
+int	ft_minint(int a, int b)
 {
-	return (a < b);
+	if (b < a)
+		return (b);
+	return (a);
+}
+int	ft_mod(int a, int b)
+{
+	return (((a % b) + b) % b);
 }
 
-void	set_top(t_stack *stack, t_ord *ord)
+int	ft_orded(t_list **a)
 {
-	t_loc_node	cur;
-
-	cur = (t_loc_node){stack->head, 0};
-	ord->top = cur;
-	while (++cur.loc < stack->size)
+	t_list *tmp;
+		
+	tmp = *a;
+	while (tmp->next)
 	{
-		cur.node = cur.node->next;
-		if (ord->gt(cur.node->value, ord->top.node->value))
-			ord->top = cur;
+
+		if (*(int *)tmp->content > *(int *)tmp->next->content)
+		{
+			return(0);
+		}
+		tmp = tmp->next;
 	}
+	return(1);
 }

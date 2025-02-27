@@ -1,13 +1,15 @@
 NAME = ./push_swap
 
-# Variables generales
+# Var
+
 CC = cc
-CFLAGS = -Wall -Wextra -Werror -Iinclude/
+CFLAGS = -Wall -Wextra -Werror -g3 -Iinclude/
 RM = rm
 RMFLAGS = -rf
 MKDIR = mkdir -p
 INCLUDE = -I${INCLUDE_DIR}
-# Directorios
+
+# Dir
 
 LIBFT_DIR = Libft/
 LIBFT_BIN = Libft/bin/
@@ -18,20 +20,28 @@ BIN_DIR = bin/
 INCLUDE_DIR = include/
 
 #Files
+
 FILES = main\
+		init_stack\
 		automata\
 		automata_error\
-		push\
-		rotate\
-		swap\
-		reverse_rotate
+		calc_rots\
+		ord\
+		p_s_movs\
+		print_rots\
+		rots_movs\
+		push_best\
+		sort_3\
+		stack_utils\
+		other_utils
 
-# FILES_ADD
+# Files add
+
 SRC = $(addprefix $(SRC_DIR), $(addsuffix .c, $(FILES)))
 
 OBJ = $(addprefix $(OBJ_DIR), $(addsuffix .o, $(FILES)))
 
-# 1ª RULE
+# 1 rule
 all: $(NAME)
 
 # Comp bin

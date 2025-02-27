@@ -6,27 +6,12 @@
 /*   By: mnieto-m <mnieto-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/28 17:40:25 by mnieto-m          #+#    #+#             */
-/*   Updated: 2025/02/15 12:23:45 by mnieto-m         ###   ########.fr       */
+/*   Updated: 2025/02/22 16:49:12 by mnieto-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void		print_rots(t_rated_node *rots, t_stack *src);
-static void	print_case_0(t_rated_node *rots, char src);
-static void	print_case_pp(t_rated_node *rots, char src);
-static void	print_case_nn(t_rated_node *rots, char src);
-
-void	print_rots(t_rated_node *rots, t_stack *src)
-{
-	calc_rots(rots);
-	if (rots->rate == 0)
-		print_case_0(rots, src->name);
-	else if (rots->rate > 0)
-		print_case_pp(rots, src->name);
-	else if (rots->rate < 0)
-		print_case_nn(rots, src->name);
-}
 
 static void	print_case_0(t_rated_node *rots, char src)
 {
@@ -105,4 +90,15 @@ static void	print_case_nn(t_rated_node *rots, char src)
 		while (rots->dst_nd.loc++)
 			write(1, rr_dst, 4);
 	}
+}
+
+void	print_rots(t_rated_node *rots, t_stack *src)
+{
+	calc_rots(rots);
+	if (rots->rate == 0)
+		print_case_0(rots, src->name);
+	else if (rots->rate > 0)
+		print_case_pp(rots, src->name);
+	else if (rots->rate < 0)
+		print_case_nn(rots, src->name);
 }

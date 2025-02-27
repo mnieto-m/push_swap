@@ -6,15 +6,11 @@
 /*   By: mnieto-m <mnieto-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 17:46:11 by mnieto-m          #+#    #+#             */
-/*   Updated: 2024/12/18 17:11:08 by mnieto-m         ###   ########.fr       */
+/*   Updated: 2025/02/26 20:28:27 by mnieto-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-
-/* ----------------------------------------------------- */
-
-/* Accion en estado, cuando llega a state == 1 */
 
 static void	automata_add_data(void *s, t_list **a, int oidx)
 {
@@ -92,6 +88,8 @@ void	automata_parse(char *str, t_list **a)
 			end_line(str, a, dt_aut);
 		dt_aut.ostate = dt_aut.state;
 	}
+	if( ft_orded(a) == TRUE)
+		success_order(a);
 }
 
 /* ----------------------------------------------------- */

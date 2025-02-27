@@ -6,17 +6,24 @@
 /*   By: mnieto-m <mnieto-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/28 17:40:54 by mnieto-m          #+#    #+#             */
-/*   Updated: 2025/02/15 12:24:16 by mnieto-m         ###   ########.fr       */
+/*   Updated: 2025/02/22 16:50:02 by mnieto-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void		sort_2(t_stack *stack);
-void		sort_3(t_stack *stack, t_ord *ord, bool relative);
-void		turk(t_stacks *s, int median, int size);
-static void	push_halves(t_stacks *s, int median, int size);
-
+static void	push_halves(t_stacks *s, int median, int size)
+{
+	while (s->b.size < size / 2)
+	{
+		if (s->a.head->value < median)
+			push(&s->a, &s->b, 1);
+		else
+			rot(&s->a, 1);
+	}
+	while (s->a.size > 3)
+		push(&s->a, &s->b, 1);
+}
 void	sort_2(t_stack *stack)
 {
 	if (stack->head->value > stack->head->next->value)
@@ -59,15 +66,3 @@ void	turk(t_stacks *s, int median, int size)
 	head_to_bottom(&s->a, &as);
 }
 
-static void	push_halves(t_stacks *s, int median, int size)
-{
-	while (s->b.size < size / 2)
-	{
-		if (s->a.head->value < median)
-			push(&s->a, &s->b, 1);
-		else
-			rot(&s->a, 1);
-	}
-	while (s->a.size > 3)
-		push(&s->a, &s->b, 1);
-}
