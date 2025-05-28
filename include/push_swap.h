@@ -6,7 +6,7 @@
 /*   By: mnieto-m <mnieto-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/25 14:58:10 by mnieto-m          #+#    #+#             */
-/*   Updated: 2025/02/26 21:06:35 by mnieto-m         ###   ########.fr       */
+/*   Updated: 2025/05/28 17:20:13 by mnieto-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,4 +135,5 @@ void		automata_error(t_list **a);
 int			ft_orded(t_list **a);
 void		success_order(t_list **a);
 
+void fail_malloc(t_list **a);
 #endif

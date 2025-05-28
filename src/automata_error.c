@@ -6,7 +6,7 @@
 /*   By: mnieto-m <mnieto-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 19:39:14 by mnieto-m          #+#    #+#             */
-/*   Updated: 2025/02/26 20:57:32 by mnieto-m         ###   ########.fr       */
+/*   Updated: 2025/05/28 17:19:46 by mnieto-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,4 +22,10 @@ void success_order(t_list **a)
 {	
 	ft_lstclear(a, free);
 	exit(EXIT_SUCCESS);
+}
+void fail_malloc(t_list **a)
+{
+	ft_lstclear(a, free);
+	exit(EXIT_FAILURE);
+	
 }

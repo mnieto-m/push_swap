@@ -6,7 +6,7 @@
 /*   By: mnieto-m <mnieto-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/21 17:39:44 by mnieto-m          #+#    #+#             */
-/*   Updated: 2025/02/26 21:09:41 by mnieto-m         ###   ########.fr       */
+/*   Updated: 2025/05/28 17:29:25 by mnieto-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,4 +64,43 @@ t_stacks	*init_stack(t_list *a, int size)
 	stacks->nodes->prev = stacks->a.head;
 	stacks->a.head = stacks->nodes;
 	return (stacks);
+}
+
+t_stacks *init_stack(t_list *a, int size)
+{
+    t_stacks *stacks;
+    t_node *current;
+    int i;
+
+    stacks = malloc(sizeof(t_stacks) + size * sizeof(t_node));
+    if (!stacks)
+        return (NULL);
+
+    memset(stacks, 0, sizeof(t_stacks));
+    stacks->a.size = size;
+    stacks->a.head = stacks->nodes;
+    stacks->a.name = 'a';
+    stacks->b.size = 0;
+    stacks->b.head = NULL;
+    stacks->b.name = 'b';
+
+    current = stacks->nodes;
+    i = 0;
+    while (i < size)
+    {
+        current->value = get_value(a, i);
+        if (i < size - 1)
+            current->next = current + 1;
+        else
+            current->next = stacks->nodes;
+
+        if (i > 0)
+            current->prev = current - 1;
+
+        current++;
+        i++;
+    }
+
+    stacks->nodes->prev = current - 1;
+    return (stacks);
 }
