@@ -6,7 +6,7 @@
 /*   By: mnieto-m <mnieto-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 19:39:14 by mnieto-m          #+#    #+#             */
-/*   Updated: 2025/05/28 17:19:46 by mnieto-m         ###   ########.fr       */
+/*   Updated: 2025/05/28 20:01:12 by mnieto-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,5 +27,33 @@ void fail_malloc(t_list **a)
 {
 	ft_lstclear(a, free);
 	exit(EXIT_FAILURE);
-	
 }
+
+void free_stack(t_stack *stack)
+{
+    t_node *current = stack->head;
+    t_node *temp;
+
+    while (current != NULL)
+    {
+        temp = current;
+        current = current->next;
+        free(temp);  // Aseguramos que estamos liberando correctamente.
+    }
+    stack->head = NULL;
+}
+
+
+void free_stacks(t_stacks *stacks)
+{
+    // Liberar las listas de 'a' y 'b' de 'stacks'
+    free_stack(&stacks->a);
+    free_stack(&stacks->b);
+
+    // Ahora liberamos el arreglo de nodos extra en 'nodes'
+    free(stacks->nodes);  // Liberamos el espacio de memoria para 'nodes'
+
+    // Finalmente liberamos la estructura 'stacks' misma.
+    free(stacks);
+}
+

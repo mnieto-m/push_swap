@@ -6,7 +6,7 @@
 /*   By: mnieto-m <mnieto-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/25 14:58:10 by mnieto-m          #+#    #+#             */
-/*   Updated: 2025/05/28 17:20:13 by mnieto-m         ###   ########.fr       */
+/*   Updated: 2025/05/28 20:05:17 by mnieto-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,4 +136,6 @@ int			ft_orded(t_list **a);
 void		success_order(t_list **a);
 
 void fail_malloc(t_list **a);
+void free_stacks(t_stacks *s);
+t_list  *ft_lstcopy_new(t_list *lst);
 #endif
