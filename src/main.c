@@ -6,7 +6,7 @@
 /*   By: mnieto-m <mnieto-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/25 17:07:02 by mnieto-m          #+#    #+#             */
-/*   Updated: 2025/05/28 20:09:34 by mnieto-m         ###   ########.fr       */
+/*   Updated: 2025/06/01 22:06:38 by mnieto-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,21 +34,21 @@ int main(int argc, char **argv)
     t_list *a;
     t_stacks *s;
     int i;
-    int size;
     int median;
-
+    
     i = 1;
     a = NULL;
     if (argc < 2)
         return (0);
-    while (i < argc)
+    while (i < argc )
         automata_parse(argv[i++], &a);
-    size = ft_lstsize(a);
-    median = get_median(a, size);
-    s = init_stack(a, size);
+    if( ft_orded(a) == TRUE )
+		success_order(&a);
+    median = get_median(a, ft_lstsize(a));
+    s = init_stack(a, ft_lstsize(a));
     if (!s)
         fail_malloc(&a);
-    aux_order(size, median, s);
+    aux_order(ft_lstsize(a), median, s);
     ft_lstclear(&a,free);
     free(s);
     return (0);

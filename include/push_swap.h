@@ -6,7 +6,7 @@
 /*   By: mnieto-m <mnieto-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/25 14:58:10 by mnieto-m          #+#    #+#             */
-/*   Updated: 2025/05/28 20:05:17 by mnieto-m         ###   ########.fr       */
+/*   Updated: 2025/06/01 22:06:54 by mnieto-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,10 +132,12 @@ int		get_median(t_list *a, int size);
 // automata
 void		automata_parse(char *str, t_list **a);
 void		automata_error(t_list **a);
-int			ft_orded(t_list **a);
+int			ft_orded(t_list *a);
 void		success_order(t_list **a);
 
 void fail_malloc(t_list **a);
 void free_stacks(t_stacks *s);
 t_list  *ft_lstcopy_new(t_list *lst);
+char	*ft_strjoin_s1free(char *s1, char *s2);
+
 #endif

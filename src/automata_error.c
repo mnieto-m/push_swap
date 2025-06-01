@@ -6,7 +6,7 @@
 /*   By: mnieto-m <mnieto-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 19:39:14 by mnieto-m          #+#    #+#             */
-/*   Updated: 2025/05/28 20:01:12 by mnieto-m         ###   ########.fr       */
+/*   Updated: 2025/06/01 22:06:20 by mnieto-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,11 +47,11 @@ void free_stack(t_stack *stack)
 void free_stacks(t_stacks *stacks)
 {
     // Liberar las listas de 'a' y 'b' de 'stacks'
-    free_stack(&stacks->a);
-    free_stack(&stacks->b);
+    if (&stacks->a)
+        free_stack(&stacks->a);
+    if (&stacks->b)
+        free_stack(&stacks->b);
 
-    // Ahora liberamos el arreglo de nodos extra en 'nodes'
-    free(stacks->nodes);  // Liberamos el espacio de memoria para 'nodes'
 
     // Finalmente liberamos la estructura 'stacks' misma.
     free(stacks);
