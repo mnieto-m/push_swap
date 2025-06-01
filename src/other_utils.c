@@ -6,7 +6,7 @@
 /*   By: mnieto-m <mnieto-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/22 16:45:14 by mnieto-m          #+#    #+#             */
-/*   Updated: 2025/06/01 22:00:33 by mnieto-m         ###   ########.fr       */
+/*   Updated: 2025/06/01 23:31:40 by mnieto-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ int	ft_minint(int a, int b)
 		return (b);
 	return (a);
 }
+
 int	ft_mod(int a, int b)
 {
 	return (((a % b) + b) % b);
@@ -32,17 +33,16 @@ int	ft_mod(int a, int b)
 
 int	ft_orded(t_list *a)
 {
-	t_list *tmp;
-		
+	t_list	*tmp;
+
 	tmp = a;
 	while (tmp->next)
 	{
-
 		if (*(int *)tmp->content > *(int *)tmp->next->content)
 		{
-			return(0);
+			return (0);
 		}
 		tmp = tmp->next;
 	}
-	return(1);
+	return (1);
 }

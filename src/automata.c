@@ -6,12 +6,11 @@
 /*   By: mnieto-m <mnieto-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 17:46:11 by mnieto-m          #+#    #+#             */
-/*   Updated: 2025/06/01 22:01:06 by mnieto-m         ###   ########.fr       */
+/*   Updated: 2025/06/01 23:28:53 by mnieto-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-
 
 static void	automata_add_data(void *s, t_list **a, int oidx)
 {
@@ -90,4 +89,3 @@ void	automata_parse(char *str, t_list **a)
 		dt_aut.ostate = dt_aut.state;
 	}
 }
-
