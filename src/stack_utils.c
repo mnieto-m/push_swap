@@ -6,12 +6,11 @@
 /*   By: mnieto-m <mnieto-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/28 17:40:45 by mnieto-m          #+#    #+#             */
-/*   Updated: 2025/02/22 17:26:29 by mnieto-m         ###   ########.fr       */
+/*   Updated: 2025/06/01 23:33:52 by mnieto-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-
 
 void	head_to_bottom(t_stack *stack, t_ord *ord)
 {
@@ -21,7 +20,7 @@ void	head_to_bottom(t_stack *stack, t_ord *ord)
 	if (rots < stack->size - rots)
 	{
 		while (rots--)
-			write(1, (char []){'r', stack->name, '\n'}, 3);
+			write(1, (char []){'r', stack->name, '\n' }, 3);
 	}
 	else
 	{

@@ -6,12 +6,11 @@
 /*   By: mnieto-m <mnieto-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/28 17:40:25 by mnieto-m          #+#    #+#             */
-/*   Updated: 2025/02/22 16:49:12 by mnieto-m         ###   ########.fr       */
+/*   Updated: 2025/06/01 23:32:42 by mnieto-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-
 
 static void	print_case_0(t_rated_node *rots, char src)
 {

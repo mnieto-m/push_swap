@@ -33,7 +33,8 @@ FILES = main\
 		push_best\
 		sort_3\
 		stack_utils\
-		other_utils
+		other_utils\
+		utils
 
 # Files add
 
