@@ -6,7 +6,7 @@
 /*   By: mnieto-m <mnieto-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/21 17:39:44 by mnieto-m          #+#    #+#             */
-/*   Updated: 2025/06/01 23:30:48 by mnieto-m         ###   ########.fr       */
+/*   Updated: 2025/06/03 17:25:27 by mnieto-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,26 +43,27 @@ static int	get_value(t_list *a, int indx)
 
 t_stacks	*init_stack(t_list *a, int size)
 {
-	t_stacks	*s;
-	t_node		*n;
-	int			i;
+	t_stacks	*stacks;
 
-	s = malloc(sizeof(t_stacks) + size * sizeof(t_node));
-	if (!s)
-		return (automata_error(&a), NULL);
-	ft_memset(s, 0, sizeof(t_stacks));
-	s->a.size = size;
-	s->a.name = 'a';
-	s->a.head = n;
-	s->b.size = 0;
-	s->b.name = 'b';
-	i = 0;
-	while (i < size)
+	stacks = malloc((sizeof(t_stacks)) + size * sizeof(t_node));
+	if (stacks == NULL)
+		automata_error(&a);
+	memset(stacks, 0, sizeof(t_stacks));
+	stacks->a.size = size;
+	stacks->a.head = stacks->nodes;
+	stacks->a.name = 'a';
+	stacks->b.size = 0;
+	stacks->b.head = NULL;
+	stacks->b.name = 'b';
+	while (--size)
 	{
-		n[i].value = get_value(a, i);
-		n[i].next = &n[(i + 1) % size];
-		n[i].prev = &n[(i + size - 1) % size];
-		i++;
+		stacks->a.head->value = get_value(a, size);
+		stacks->a.head->next = stacks->a.head + 1;
+		(stacks->a.head + 1)->prev = stacks->a.head;
+		stacks->a.head++;
 	}
-	return (s);
+	stacks->a.head->next = stacks->nodes;
+	stacks->nodes->prev = stacks->a.head;
+	stacks->a.head = stacks->nodes;
+	return (stacks);
 }

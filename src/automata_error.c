@@ -6,7 +6,7 @@
 /*   By: mnieto-m <mnieto-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 19:39:14 by mnieto-m          #+#    #+#             */
-/*   Updated: 2025/06/01 23:34:46 by mnieto-m         ###   ########.fr       */
+/*   Updated: 2025/06/03 17:30:11 by mnieto-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,9 +48,7 @@ void	free_stack(t_stack *stack)
 
 void	free_stacks(t_stacks *stacks)
 {
-	if (&stacks->a)
-		free_stack(&stacks->a);
-	if (&stacks->b)
-		free_stack(&stacks->b);
+	free_stack(&stacks->a);
+	free_stack(&stacks->b);
 	free(stacks);
 }

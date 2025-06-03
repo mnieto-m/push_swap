@@ -6,7 +6,7 @@
 /*   By: mnieto-m <mnieto-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/25 14:58:10 by mnieto-m          #+#    #+#             */
-/*   Updated: 2025/06/01 23:35:59 by mnieto-m         ###   ########.fr       */
+/*   Updated: 2025/06/03 17:19:26 by mnieto-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -138,6 +138,5 @@ void					success_order(t_list **a);
 void					fail_malloc(t_list **a);
 void					free_stacks(t_stacks *s);
 t_list					*ft_lstcopy_new(t_list *lst);
-char					*ft_strjoin_s1free(char *s1, char *s2);
 
 #endif
