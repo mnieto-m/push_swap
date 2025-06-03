@@ -6,7 +6,7 @@
 /*   By: mnieto-m <mnieto-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/21 17:39:44 by mnieto-m          #+#    #+#             */
-/*   Updated: 2025/06/03 18:12:14 by mnieto-m         ###   ########.fr       */
+/*   Updated: 2025/06/03 18:21:22 by mnieto-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,40 +41,43 @@ static int	get_value(t_list *a, int indx)
 	return (*(int *)(a->content));
 }
 
-static void init_nodes(t_stacks *stacks, t_list *a, int size)
+static void	init_nodes(t_stacks *stacks, t_list *a, int size)
 {
-    t_node *current = stacks->a.head;
-    int i = 0;
+	t_node	*current;
+	int		i;
 
-    while (i < size)
-    {
-        current->value = get_value(a, i);
-        if (i == size - 1)
-            current->next = stacks->a.head;
-        else
-            current->next = current + 1;
-        if (i == 0)
-            current->prev = stacks->a.head + size - 1;
-        else
-            current->prev = current - 1;
-        current++;
-        i++;
-    }
+	current = stacks->a.head;
+	i = 0;
+	while (i < size)
+	{
+		current->value = get_value(a, i);
+		if (i == size - 1)
+			current->next = stacks->a.head;
+		else
+			current->next = current + 1;
+		if (i == 0)
+			current->prev = stacks->a.head + size - 1;
+		else
+			current->prev = current - 1;
+		current++;
+		i++;
+	}
 }
 
-t_stacks *init_stack(t_list *a, int size)
+t_stacks	*init_stack(t_list *a, int size)
 {
-    t_stacks *stacks = malloc(sizeof(t_stacks) + size * sizeof(t_node));
+	t_stacks	*stacks;
 
-    if (!stacks)
-        automata_error(&a);
-    ft_memset(stacks, 0, sizeof(t_stacks));
-    stacks->a.head = (t_node *)(stacks + 1);
-    stacks->a.size = size;
-    stacks->a.name = 'a';
-    stacks->b.head = NULL;
-    stacks->b.size = 0;
-    stacks->b.name = 'b';
-    init_nodes(stacks, a, size);
-    return (stacks);
+	stacks = malloc(sizeof(t_stacks) + size * sizeof(t_node));
+	if (!stacks)
+		automata_error(&a);
+	ft_memset(stacks, 0, sizeof(t_stacks));
+	stacks->a.head = (t_node *)(stacks + 1);
+	stacks->a.size = size;
+	stacks->a.name = 'a';
+	stacks->b.head = NULL;
+	stacks->b.size = 0;
+	stacks->b.name = 'b';
+	init_nodes(stacks, a, size);
+	return (stacks);
 }
