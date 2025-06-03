@@ -6,7 +6,7 @@
 /*   By: mnieto-m <mnieto-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/25 17:07:02 by mnieto-m          #+#    #+#             */
-/*   Updated: 2025/06/03 17:58:40 by mnieto-m         ###   ########.fr       */
+/*   Updated: 2025/06/03 18:39:09 by mnieto-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,10 +39,12 @@ int	main(int argc, char **argv)
 
 	i = 1;
 	a = NULL;
-	if (argc < 2)
+	if (argc < 2 || argv[1][0] == '\0')
 		return (0);
 	while (i < argc)
 		automata_parse(argv[i++], &a);
+	if (!a)
+		return (0);
 	if (ft_orded(a) == TRUE)
 		success_order(&a);
 	size = ft_lstsize(a);
