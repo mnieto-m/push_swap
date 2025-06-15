@@ -6,7 +6,7 @@
 /*   By: mnieto-m <mnieto-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 17:46:11 by mnieto-m          #+#    #+#             */
-/*   Updated: 2025/02/26 20:28:27 by mnieto-m         ###   ########.fr       */
+/*   Updated: 2025/06/15 13:56:11 by mnieto-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,22 +88,4 @@ void	automata_parse(char *str, t_list **a)
 			end_line(str, a, dt_aut);
 		dt_aut.ostate = dt_aut.state;
 	}
-	if( ft_orded(a) == TRUE)
-		success_order(a);
 }
-
-/* ----------------------------------------------------- */
-/* 
-int	main(int argc, char **argv)
-{
-	t_list	*a;
-	int		i;
-
-	i = 1;
-	a = NULL;
-	while (i >= 1 && i < argc)
-		automata_parse(argv[i++], &a);
-	printList(a);
-	ft_lstclear(&a, free);
-	return (0);
-} */

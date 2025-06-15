@@ -6,7 +6,7 @@
 /*   By: mnieto-m <mnieto-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/25 17:07:02 by mnieto-m          #+#    #+#             */
-/*   Updated: 2025/02/26 21:07:35 by mnieto-m         ###   ########.fr       */
+/*   Updated: 2025/06/15 13:50:09 by mnieto-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@ int	main(int argc, char **argv)
 		return (0);
 	while (i < argc)
 		automata_parse(argv[i++], &a);
+	if( ft_orded(a) == TRUE)
+		success_order(a);
 	size = ft_lstsize(a);
 	median = get_median(a, size);
 	s = init_stack(a, size);

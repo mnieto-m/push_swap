@@ -3,7 +3,7 @@ NAME = ./push_swap
 # Var
 
 CC = cc
-CFLAGS = -Wall -Wextra -Werror -g3 -Iinclude/
+CFLAGS = -Wall -Wextra -Werror -g3
 RM = rm
 RMFLAGS = -rf
 MKDIR = mkdir -p
