@@ -6,7 +6,7 @@
 /*   By: mnieto-m <mnieto-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/21 17:39:44 by mnieto-m          #+#    #+#             */
-/*   Updated: 2025/07/30 13:44:06 by mnieto-m         ###   ########.fr       */
+/*   Updated: 2025/07/30 16:26:25 by mnieto-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,41 +21,30 @@ static int	get_value(t_list *a, int indx)
 	return (*(int *)(a->content));
 }
 
-
-static void init_nodes(t_stacks *stacks, t_list *a, int size)
+t_stacks	*init_stack(t_list *a, int size)
 {
-    t_node *current = stacks->a.head;
-    int i = 0;
+	t_stacks	*stacks;
 
-    while (i < size)
-    {
-        current->value = get_value(a, i);
-        if (i == size - 1)
-            current->next = stacks->a.head;
-        else
-            current->next = current + 1;
-        if (i == 0)
-            current->prev = stacks->a.head + size - 1;
-        else
-            current->prev = current - 1;
-        current++;
-        i++;
-    }
-}
-
-t_stacks *init_stack(t_list *a, int size)
-{
-    t_stacks *stacks = malloc(sizeof(t_stacks) + size * sizeof(t_node));
-
-    if (!stacks)
-        automata_error(&a);
-    ft_memset(stacks, 0, sizeof(t_stacks));
-    stacks->a.head = (t_node *)(stacks + 1);
-    stacks->a.size = size;
-    stacks->a.name = 'a';
-    stacks->b.head = NULL;
-    stacks->b.size = 0;
-    stacks->b.name = 'b';
-    init_nodes(stacks, a, size);
-    return (stacks);
+	stacks = malloc((sizeof(t_stacks)) + size * sizeof(t_node));
+	if (stacks == NULL)
+		automata_error(&a);
+	ft_bzero(stacks, sizeof(t_stacks) + size * sizeof(t_node));
+	stacks->size = size;
+	stacks->a.size = size;
+	stacks->a.head = stacks->nodes;
+	stacks->a.name = 'a';
+	stacks->b.size = 0;
+	stacks->b.head = NULL;
+	stacks->b.name = 'b';
+	while (--size)
+	{
+		stacks->a.head->value = get_value(a, size);
+		stacks->a.head->next = stacks->a.head + 1;
+		(stacks->a.head + 1)->prev = stacks->a.head;
+		stacks->a.head++;
+	}
+	stacks->a.head->next = stacks->nodes;
+	stacks->nodes->prev = stacks->a.head;
+	stacks->a.head = stacks->nodes;
+	return (stacks);
 }

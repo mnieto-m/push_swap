@@ -6,7 +6,7 @@
 /*   By: mnieto-m <mnieto-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/26 14:23:13 by mnieto-m          #+#    #+#             */
-/*   Updated: 2025/07/30 13:54:39 by mnieto-m         ###   ########.fr       */
+/*   Updated: 2025/07/30 15:05:47 by mnieto-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ t_list	*ft_lstcopy_new(t_list *lst)
 	}
 	return (new_list);
 }
+
 int	get_median(t_list *a, int size)
 {
 	t_list	*copy;
@@ -47,6 +48,6 @@ int	get_median(t_list *a, int size)
 	while (++i < size / 2)
 		tmp = tmp->next;
 	rslt = *(int *)(tmp->content);
-	ft_lstclear(&copy,free); //cuidado quue liberas el contenido de copy
+	ft_lstclear(&copy, free);
 	return (rslt);
 }
