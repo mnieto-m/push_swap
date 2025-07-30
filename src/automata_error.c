@@ -6,11 +6,11 @@
 /*   By: mnieto-m <mnieto-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 19:39:14 by mnieto-m          #+#    #+#             */
-/*   Updated: 2025/06/15 13:56:34 by mnieto-m         ###   ########.fr       */
+/*   Updated: 2025/07/30 13:09:11 by mnieto-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "./../include/push_swap.h"
 
 void	automata_error(t_list **a)
 {
@@ -19,9 +19,9 @@ void	automata_error(t_list **a)
 	exit(EXIT_FAILURE);
 }
 
-void	success_order(t_list **a)
+void	success_order(t_list *a)
 {
-	ft_lstclear(a, free);
+	ft_lstclear(&a, free);
 	exit(EXIT_SUCCESS);
 }
 

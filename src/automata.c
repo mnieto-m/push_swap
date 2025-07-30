@@ -6,11 +6,11 @@
 /*   By: mnieto-m <mnieto-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 17:46:11 by mnieto-m          #+#    #+#             */
-/*   Updated: 2025/06/15 13:56:11 by mnieto-m         ###   ########.fr       */
+/*   Updated: 2025/07/30 12:57:30 by mnieto-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "./../include/push_swap.h"
 
 static void	automata_add_data(void *s, t_list **a, int oidx)
 {

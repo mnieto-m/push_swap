@@ -6,11 +6,11 @@
 /*   By: mnieto-m <mnieto-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/25 17:07:02 by mnieto-m          #+#    #+#             */
-/*   Updated: 2025/06/15 13:50:09 by mnieto-m         ###   ########.fr       */
+/*   Updated: 2025/07/30 14:03:35 by mnieto-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "./../include/push_swap.h"
 
 int	main(int argc, char **argv)
 {
@@ -40,5 +40,6 @@ int	main(int argc, char **argv)
 		sort_3(&s->a, &(t_ord){greater, {NULL, 0}}, 0);
 	else
 		turk(s, median, size);
+	free(s);
 	return (0);
 }

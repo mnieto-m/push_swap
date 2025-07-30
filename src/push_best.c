@@ -6,11 +6,11 @@
 /*   By: mnieto-m <mnieto-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/28 17:40:33 by mnieto-m          #+#    #+#             */
-/*   Updated: 2025/02/22 16:54:28 by mnieto-m         ###   ########.fr       */
+/*   Updated: 2025/07/30 12:59:35 by mnieto-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "./../include/push_swap.h"
 
 void	get_rots(t_stack *src, t_stack *dst, t_ord *ord, t_rated_node *rnd)
 {

@@ -6,11 +6,11 @@
 /*   By: mnieto-m <mnieto-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/28 17:40:05 by mnieto-m          #+#    #+#             */
-/*   Updated: 2025/02/19 22:40:30 by mnieto-m         ###   ########.fr       */
+/*   Updated: 2025/07/30 12:57:57 by mnieto-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "./../include/push_swap.h"
 
 bool	greater(int a, int b)
 {

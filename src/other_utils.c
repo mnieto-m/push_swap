@@ -6,11 +6,11 @@
 /*   By: mnieto-m <mnieto-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/22 16:45:14 by mnieto-m          #+#    #+#             */
-/*   Updated: 2025/02/26 20:28:16 by mnieto-m         ###   ########.fr       */
+/*   Updated: 2025/07/30 13:09:19 by mnieto-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "./../include/push_swap.h"
 
 int	ft_maxint(int a, int b)
 {
@@ -30,11 +30,11 @@ int	ft_mod(int a, int b)
 	return (((a % b) + b) % b);
 }
 
-int	ft_orded(t_list **a)
+int	ft_orded(t_list *a)
 {
 	t_list *tmp;
 		
-	tmp = *a;
+	tmp = a;
 	while (tmp->next)
 	{
 

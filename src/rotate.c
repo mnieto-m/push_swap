@@ -6,11 +6,11 @@
 /*   By: mnieto-m <mnieto-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/26 14:23:10 by mnieto-m          #+#    #+#             */
-/*   Updated: 2024/12/18 17:13:32 by mnieto-m         ###   ########.fr       */
+/*   Updated: 2025/07/30 12:59:43 by mnieto-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "./../include/push_swap.h"
 
 void ft_rotate(t_list **a)
 {
